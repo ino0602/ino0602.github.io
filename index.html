@@ -1,7 +1,686 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="수학과 통계를 좋아하는 첨단융합학부 학생 최인호의 개인 홈페이지입니다.">
+  <meta name="theme-color" content="#f4f1ea">
+  <title>최인호 | Personal Page</title>
+  <style>
+    :root {
+      --paper: #f4f1ea;
+      --paper-strong: #ebe6dc;
+      --ink: #19243a;
+      --muted: #697080;
+      --line: rgba(25, 36, 58, 0.14);
+      --accent: #ef6a3a;
+      --accent-soft: #f8d9cb;
+      --blue: #4769e8;
+      --blue-soft: #dce4ff;
+      --card: rgba(255, 255, 255, 0.58);
+      --shadow: 0 22px 60px rgba(40, 43, 54, 0.10);
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(239, 106, 58, 0.12), transparent 28rem),
+        radial-gradient(circle at 92% 28%, rgba(71, 105, 232, 0.10), transparent 30rem),
+        var(--paper);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Inter, system-ui, sans-serif;
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 0;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-mark {
+      width: 13px;
+      height: 13px;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      box-shadow: 5px -5px 0 var(--accent);
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .site-nav a {
+      transition: color 180ms ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      color: var(--accent);
+    }
+
+    main {
+      padding: 44px 0 90px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+      gap: 56px;
+      align-items: center;
+      min-height: 620px;
+      padding: 28px 0 92px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 770px;
+      margin-bottom: 28px;
+      font-size: clamp(3.25rem, 8vw, 6.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+    }
+
+    h1 span {
+      position: relative;
+      display: inline-block;
+      color: var(--accent);
+    }
+
+    h1 span::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      right: -0.08em;
+      bottom: 0.02em;
+      left: 0.02em;
+      height: 0.18em;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      transform: rotate(-2deg);
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: clamp(1.03rem, 1.7vw, 1.25rem);
+    }
+
+    .hero-copy strong {
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button.primary {
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 0 8px 0 rgba(25, 36, 58, 0.15);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-3px);
+    }
+
+    .hero-portrait {
+      position: relative;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 50% 50% 38% 38% / 42% 42% 30% 30%;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.25)),
+        var(--blue-soft);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-portrait::before,
+    .hero-portrait::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .hero-portrait::before {
+      width: 78%;
+      aspect-ratio: 1;
+      background: var(--accent-soft);
+      transform: translate(28%, 40%);
+    }
+
+    .hero-portrait::after {
+      width: 42%;
+      aspect-ratio: 1;
+      border: 18px solid rgba(71, 105, 232, 0.26);
+      transform: translate(-72%, -102%);
+    }
+
+    .monogram {
+      position: relative;
+      z-index: 1;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(5rem, 11vw, 8.5rem);
+      font-weight: 700;
+      letter-spacing: -0.08em;
+      line-height: 1;
+      transform: translateX(-0.04em);
+    }
+
+    .portrait-label {
+      position: absolute;
+      z-index: 2;
+      right: 18px;
+      bottom: 22px;
+      padding: 7px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 0.74rem;
+      font-weight: 800;
+      backdrop-filter: blur(10px);
+    }
+
+    section {
+      scroll-margin-top: 24px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 30px;
+      align-items: end;
+      padding-top: 84px;
+      margin-bottom: 38px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-number {
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.045em;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 30px;
+      padding-bottom: 100px;
+    }
+
+    .profile-note {
+      align-self: start;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-note .type {
+      display: block;
+      margin-bottom: 32px;
+      color: #aebfff;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 3.1rem;
+      line-height: 1;
+    }
+
+    .profile-note p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.92rem;
+    }
+
+    .about-text {
+      max-width: 720px;
+      font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+      line-height: 1.65;
+      letter-spacing: -0.025em;
+    }
+
+    .about-text strong {
+      padding: 0 0.08em;
+      background: linear-gradient(transparent 65%, var(--blue-soft) 65%);
+    }
+
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding-bottom: 100px;
+    }
+
+    .interest-card {
+      position: relative;
+      min-height: 250px;
+      overflow: hidden;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--card);
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(25, 36, 58, 0.3);
+      box-shadow: var(--shadow);
+    }
+
+    .interest-card.wide {
+      grid-column: span 2;
+    }
+
+    .card-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      margin-bottom: 56px;
+      border-radius: 15px;
+      background: var(--paper-strong);
+      font-size: 1.45rem;
+    }
+
+    .interest-card:nth-child(2) .card-icon,
+    .interest-card:nth-child(5) .card-icon {
+      background: var(--blue-soft);
+    }
+
+    .interest-card:nth-child(3) .card-icon,
+    .interest-card:nth-child(4) .card-icon {
+      background: var(--accent-soft);
+    }
+
+    .interest-card h3 {
+      margin-bottom: 7px;
+      font-size: 1.25rem;
+      letter-spacing: -0.025em;
+    }
+
+    .interest-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .strengths {
+      padding-bottom: 90px;
+    }
+
+    .strength-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .strength-list span {
+      padding: 13px 19px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.45);
+      font-weight: 750;
+    }
+
+    .closing {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(32px, 7vw, 72px);
+      border-radius: var(--radius-lg);
+      background: var(--blue);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .closing::after {
+      content: "∞";
+      position: absolute;
+      right: -0.04em;
+      bottom: -0.48em;
+      color: rgba(255, 255, 255, 0.1);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(12rem, 35vw, 27rem);
+      line-height: 1;
+    }
+
+    .closing p {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin-bottom: 0;
+      font-size: clamp(1.55rem, 4vw, 3rem);
+      font-weight: 760;
+      line-height: 1.35;
+      letter-spacing: -0.045em;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 34px 0 40px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .site-header {
+        padding: 20px 0;
+      }
+
+      .site-nav {
+        gap: 14px;
+        font-size: 0.78rem;
+      }
+
+      main {
+        padding-top: 18px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        min-height: 0;
+        padding: 30px 0 76px;
+      }
+
+      .hero-portrait {
+        width: min(100%, 390px);
+        justify-self: center;
+      }
+
+      .section-heading,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        gap: 8px;
+        padding-top: 64px;
+      }
+
+      .about-grid {
+        gap: 18px;
+        padding-bottom: 76px;
+      }
+
+      .profile-note .type {
+        margin-bottom: 16px;
+      }
+
+      .interest-grid {
+        grid-template-columns: 1fr;
+        padding-bottom: 76px;
+      }
+
+      .interest-card.wide {
+        grid-column: span 1;
+      }
+
+      .interest-card {
+        min-height: 210px;
+      }
+
+      .card-icon {
+        margin-bottom: 36px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 3px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .site-nav a:first-child {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 17vw, 4.5rem);
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
 <body>
-<h1>안녕하세요, 제 홈페이지입니다</h1>
-<p>GitHub Pages로 만들었습니다!</p>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="logo" href="#top" aria-label="최인호 홈페이지 처음으로">
+        <span class="logo-mark" aria-hidden="true"></span>
+        INHO CHOI
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="#about">소개</a>
+        <a href="#interests">관심사</a>
+        <a href="#strengths">강점</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">Student · Explorer · INFP</p>
+          <h1 id="hero-title">안녕하세요,<br><span>최인호</span>입니다.</h1>
+          <p class="hero-copy">
+            <strong>수학적 호기심</strong>으로 세상을 관찰하고,<br>
+            좋아하는 것에 깊이 몰입하는 학생입니다.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#about">저를 소개할게요 ↓</a>
+            <a class="button secondary" href="#interests">관심사 둘러보기</a>
+          </div>
+        </div>
+
+        <div class="hero-portrait" aria-label="최인호의 한글 초성 ㅇㅎ을 활용한 그래픽">
+          <span class="monogram" aria-hidden="true">ㅇㅎ</span>
+          <span class="portrait-label">SEOUL · 2007</span>
+        </div>
+      </section>
+
+      <section id="about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <span class="section-number">01 — About</span>
+          <h2 id="about-title">생각하고, 느끼고,<br>끝까지 해내는 사람</h2>
+        </div>
+        <div class="about-grid">
+          <aside class="profile-note">
+            <span class="type">INFP</span>
+            <p>호기심과 공감을 바탕으로 나만의 속도와 시선으로 세상을 알아갑니다.</p>
+          </aside>
+          <p class="about-text">
+            2007년생으로 <strong>첨단융합학부</strong>에 재학 중입니다.
+            수학과 통계로 복잡한 문제의 질서를 찾는 일을 좋아하며,
+            새로운 장소를 여행하고 다양한 경험을 쌓는 데서 영감을 얻습니다.
+            차분히 분석하되 사람의 마음을 놓치지 않는 태도를 중요하게 생각합니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="interests" aria-labelledby="interests-title">
+        <div class="section-heading">
+          <span class="section-number">02 — Interests</span>
+          <h2 id="interests-title">제가 좋아하는 것들</h2>
+        </div>
+        <div class="interest-grid">
+          <article class="interest-card">
+            <div class="card-icon" aria-hidden="true">♞</div>
+            <h3>체스</h3>
+            <p>몇 수 앞을 그리며 최선의 선택을 탐색하는 즐거움.</p>
+          </article>
+          <article class="interest-card">
+            <div class="card-icon" aria-hidden="true">◒</div>
+            <h3>배드민턴</h3>
+            <p>빠른 판단과 움직임이 만들어 내는 기분 좋은 몰입.</p>
+          </article>
+          <article class="interest-card">
+            <div class="card-icon" aria-hidden="true">⌁</div>
+            <h3>게임</h3>
+            <p>특히 오버워치를 좋아해요. 팀과 호흡하며 전략을 맞춰 갑니다.</p>
+          </article>
+          <article class="interest-card wide">
+            <div class="card-icon" aria-hidden="true">♫</div>
+            <h3>음악</h3>
+            <p>힙합의 에너지, 클래식의 깊이, 재즈의 자유로움을 모두 즐깁니다.</p>
+          </article>
+          <article class="interest-card">
+            <div class="card-icon" aria-hidden="true">∑</div>
+            <h3>수학과 통계</h3>
+            <p>숫자와 데이터 속 규칙을 발견하고 논리적으로 설명하는 과정.</p>
+          </article>
+          <article class="interest-card wide">
+            <div class="card-icon" aria-hidden="true">↗</div>
+            <h3>여행</h3>
+            <p>익숙한 곳을 벗어나 새로운 풍경과 사람, 생각을 만나는 시간.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="strengths" class="strengths" aria-labelledby="strengths-title">
+        <div class="section-heading">
+          <span class="section-number">03 — Strengths</span>
+          <h2 id="strengths-title">저를 설명하는 네 가지 힘</h2>
+        </div>
+        <div class="strength-list" aria-label="최인호의 강점">
+          <span>분석력</span>
+          <span>책임감</span>
+          <span>공감</span>
+          <span>배려</span>
+        </div>
+      </section>
+
+      <section class="closing" aria-label="마무리 문장">
+        <p>숫자를 깊이 들여다보고,<br>사람을 따뜻하게 바라봅니다.</p>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 최인호</span>
+      <span>Designed with curiosity &amp; care.</span>
+    </footer>
+  </div>
 </body>
 </html>
